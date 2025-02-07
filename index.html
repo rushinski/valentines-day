@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="envelope" onclick="openEnvelope()">
+      <div class="msg" onclick="showFullMessage()">
+        <p>To Makenna</p>
+      </div>
+      <div class="top-part"></div>
+      <div class="right-part"></div>
+      <div class="left-part"></div>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="popupMessage"></span>
+          <button onclick="closePopup()">Close</button>
+        </div>
+      <div id="hearts-container" class="hearts-container"></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+

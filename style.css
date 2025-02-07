@@ -1,0 +1,184 @@
+body {
+  background: #ffefef; /* Light pink background */
+}
+
+.main-container,
+.envelope {
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    min-height: 100vh;
+    align-items: center;
+    min-width: 200px;
+}
+
+.envelope {
+    width: 160px;
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+    perspective: 1000px;
+    background: #E57373;
+    border-radius: 0 0 10px 10px;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+}
+
+.msg {
+    bottom: 0;
+    width: 80%;
+    height: 80%;
+    color: black;
+    font-family: 'Brush Script MT', cursive;
+    transition: .5s;
+    position: absolute;
+    text-align: center;
+    border-radius: 5px;
+    background: white;
+    transition: transform 1s ease-in-out;
+}
+
+.msg::before {
+    top: 15%;
+    width: 42%;
+}
+
+.msg::after {
+    top: 40%;
+    width: 50%;
+}
+
+.left-part,
+.right-part {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    bottom: 0%;
+    filter: drop-shadow(0px 0px 1px rgb(0, 0, 0));
+}
+
+.left-part::before,
+.right-part::before,
+.top-part::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 10px 10px;
+}
+
+.left-part::before {
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    background: #ffccd9; /* Even lighter pink */
+}
+
+.right-part::before {
+  background: #ff9eb5; /* Slightly darker pink */
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.top-part {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    transition: 1s .2s;
+    transform-origin: top;
+    transform: rotateX(1deg);
+    filter: drop-shadow(0px 1px 1px rgb(0, 0, 0, .8));
+}
+
+.top-part::before {
+    clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
+    background: #ff8fa3; /* Darker pink */
+}
+
+.envelope.open .msg {
+  transform: translateY(-50px);
+  transition: 1.5s .2s !important;
+  z-index: 3;
+}
+
+.envelope.open .count {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.envelope.open .top-part {
+  transform: rotateX(190deg);
+  transition: .5s !important;
+  filter: none;
+}
+
+/* Pop-up styling */
+.popup {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+.popup button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f0a500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #ff8000;
+}
+
+/* Hearts animation container */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ensure it doesn't interfere with other elements */
+  z-index: 999; /* Make sure hearts are above other content */
+  overflow: hidden; /* Prevent hearts from overflowing */
+}
+
+/* Heart style */
+.heart {
+  position: absolute;
+  top: -50px; /* Start above the screen */
+  font-size: 24px;
+  color: red;
+  opacity: 1;
+  animation: fall 3s linear infinite;
+  pointer-events: none; /* Ensure hearts don't interfere with clicks */
+}
+
+/* Keyframe animation to make hearts fall */
+@keyframes fall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
